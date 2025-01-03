@@ -1,6 +1,7 @@
 import React from 'react'
 import { Accordion } from 'react-bootstrap';
 
+
 const Home = () => {
   const styles = {
     heroSection: {
@@ -34,6 +35,10 @@ const Home = () => {
     <div className='container align-items-center text-center'>
       <section className='hero-section text-center' style={styles.heroSection}>
         <h1 style={styles.title}>SwiftAid</h1>
+        
+
+
+
         <p className='hero-text' style={{ color: '#e53935', fontSize: '1.5rem' }}>
           Quick emergency assistance when it matters most
         </p>
@@ -42,35 +47,7 @@ const Home = () => {
         </p>
       </section>
 
-      <section className='features-section mt-5'>
-        <h2 className='mb-4' style={styles.sectionTitle}>Features</h2>
-        <div className='row justify-content-center'>
-          <div className='col-md-4 mb-3'>
-            <div className='card h-100' style={styles.card}>
-              <div className='card-body'>
-                <h3 className='card-title h5' style={{ color: '#1a237e' }}>Post Relief Requests</h3>
-                <p className='card-text' style={{ color: '#424242' }}>Post and manage relief requests when you need assistance</p>
-              </div>
-            </div>
-          </div>
-          <div className='col-md-4 mb-3'>
-            <div className='card h-100' style={styles.card}>
-              <div className='card-body'>
-                <h3 className='card-title h5' style={{ color: '#1a237e' }}>Interactive Map</h3>
-                <p className='card-text' style={{ color: '#424242' }}>Find requests near you on an interactive map</p>
-              </div>
-            </div>
-          </div>
-          <div className='col-md-4 mb-3'>
-            <div className='card h-100' style={styles.card}>
-              <div className='card-body'>
-                <h3 className='card-title h5' style={{ color: '#1a237e' }}>Real-time Notifications</h3>
-                <p className='card-text' style={{ color: '#424242' }}>Get notified when someone nearby needs your help</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       <section className='how-it-works-section mt-5 mb-5'>
         <h2 className='mb-4' style={styles.sectionTitle}>How Does It Work?</h2>

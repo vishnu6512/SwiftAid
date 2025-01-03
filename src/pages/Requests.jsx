@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Card, Button, Dropdown } from 'react-bootstrap'
-import { getAllRequests, getAllVolunteers, updateRequest } from '../services/allAPI'
+import { getAllRequests, getAllVolunteers, updateRequest, deleteRequest } from '../services/allAPI'
+import { Trash } from 'react-bootstrap-icons'
 
 
 const Requests = () => {
@@ -40,6 +41,13 @@ const Requests = () => {
         }
     }
 
+    const handleDeleteRequest = async (requestId) => {
+        const response = await deleteRequest(requestId)
+        if (response.status) {
+            fetchAllRequests()
+        }
+    }
+
     const styles = {
         title: {
             color: '#1a237e',
@@ -53,6 +61,7 @@ const Requests = () => {
             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
             border: 'none',
             height: '100%',
+            position: 'relative',
             ':hover': {
                 transform: 'translateY(-5px)'
             }
@@ -70,6 +79,11 @@ const Requests = () => {
             ':hover': {
                 backgroundColor: '#c62828'
             }
+        },
+        deleteButton: {
+            position: 'absolute',
+            bottom: '1rem',
+            right: '1rem'
         }
     };
 
@@ -119,6 +133,14 @@ const Requests = () => {
                                 <Card.Text style={styles.cardText}>
                                     Assigned to: {request.assignedVolunteer?.name}
                                 </Card.Text>
+                                <Button 
+                                    variant="danger" 
+                                    size="sm"
+                                    onClick={() => handleDeleteRequest(request.id)}
+                                    style={styles.deleteButton}
+                                >
+                                    <Trash size={16} />
+                                </Button>
                             </Card.Body>
                         </Card>
                     </Col>

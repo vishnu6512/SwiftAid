@@ -25,3 +25,7 @@ export const updateRequest = async (request) => {
     return await commonAPI("PUT", `${serverURL}/requests/${request.id}`, request)
 }
 
+// to delete a request from the server
+export const deleteRequest = async (requestId) => {
+    return await commonAPI("DELETE", `${serverURL}/requests/${requestId}`)
+}

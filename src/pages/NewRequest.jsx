@@ -168,9 +168,33 @@ const NewRequest = () => {
 
     const handleSubmit = async (e) =>  {
         e.preventDefault()
-        console.log(requestDetails)
-        const response = await saveRequest(requestDetails)
-        console.log(response)
+        try {
+            const response = await saveRequest(requestDetails)
+            if (response) {
+                alert('Request successfully submitted. Please wait for help to arrive.')
+                // Reset all form fields
+                setRequestDetails({
+                    title: '',
+                    description: '',
+                    location: '',
+                    contact: '',
+                    lat: null,
+                    lng: null
+                })
+                // Reset the marker position if it exists
+                if (marker) {
+                    marker.setMap(null)
+                }
+                // Reset map zoom and center if needed
+                if (map) {
+                    map.setCenter({ lat: 0, lng: 0 })
+                    map.setZoom(2)
+                }
+            }
+        } catch (error) {
+            alert('Error submitting request. Please try again.')
+            console.error('Error:', error)
+        }
     }
 
   return (
@@ -184,7 +208,9 @@ const NewRequest = () => {
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label style={styles.formLabel}>Request Title</Form.Label>
-          <Form.Control onChange={(e) => setRequestDetails({...requestDetails, title: e.target.value})}
+          <Form.Control 
+            onChange={(e) => setRequestDetails({...requestDetails, title: e.target.value})}
+            value={requestDetails.title}
             type="text"
             id="title"
             name="title"
@@ -196,7 +222,9 @@ const NewRequest = () => {
 
         <Form.Group className="mb-3">
           <Form.Label style={styles.formLabel}>Detailed Description</Form.Label>
-          <Form.Control onChange={(e) => setRequestDetails({...requestDetails, description: e.target.value})}
+          <Form.Control 
+            onChange={(e) => setRequestDetails({...requestDetails, description: e.target.value})}
+            value={requestDetails.description}
             as="textarea"
             id="description"
             name="description"
@@ -228,7 +256,9 @@ const NewRequest = () => {
 
         <Form.Group className="mb-3">
           <Form.Label style={styles.formLabel}>Contact Information</Form.Label>
-          <Form.Control onChange={(e) => setRequestDetails({...requestDetails, contact: e.target.value})}
+          <Form.Control 
+            onChange={(e) => setRequestDetails({...requestDetails, contact: e.target.value})}
+            value={requestDetails.contact}
             type="text"
             id="contact"
             name="contact"
