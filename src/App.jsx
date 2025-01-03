@@ -3,6 +3,7 @@ import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
 import Home from './pages/Home'
 import NewRequest from './pages/NewRequest'
+import Requests from './pages/Requests'
 import './App.css'
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/new-request" element={<NewRequest />} />
-            <Route path="/requests" element={<div>Requests Page</div>} />
+            <Route path="/requests" element={<Requests />} />
             <Route path="/volunteers" element={<div>Volunteers Page</div>} />
           </Routes>
         </main>
