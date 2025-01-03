@@ -10,3 +10,8 @@ export const saveRequest = async (reqBody) => {
 export const getAllRequests = async () => {
     return await commonAPI("GET", `${serverURL}/requests`)
 }
+
+// to save a new volunteer in the database
+export const saveVolunteer = async (reqBody) => {
+    return await commonAPI("POST", `${serverURL}/volunteers`, reqBody)
+}

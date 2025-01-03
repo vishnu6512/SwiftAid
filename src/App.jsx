@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import NewRequest from './pages/NewRequest'
 import Requests from './pages/Requests'
 import './App.css'
+import Volunteers from './pages/Volunteers'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/new-request" element={<NewRequest />} />
             <Route path="/requests" element={<Requests />} />
-            <Route path="/volunteers" element={<div>Volunteers Page</div>} />
+            <Route path="/volunteers" element={<Volunteers/>} />
           </Routes>
         </main>
         <Footer />
