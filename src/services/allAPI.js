@@ -15,3 +15,13 @@ export const getAllRequests = async () => {
 export const saveVolunteer = async (reqBody) => {
     return await commonAPI("POST", `${serverURL}/volunteers`, reqBody)
 }
+
+// to get all volunteers from the server
+export const getAllVolunteers = async () => {
+    return await commonAPI("GET", `${serverURL}/volunteers`)
+}
+
+export const updateRequest = async (request) => {
+    return await commonAPI("PUT", `${serverURL}/requests/${request.id}`, request)
+}
+
