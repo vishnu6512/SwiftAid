@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom'
 
 function BasicExample() {
   return (
@@ -12,7 +13,7 @@ function BasicExample() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href='/'>Home</Nav.Link>
-            <Nav.Link href='/newrequest'>New Request</Nav.Link>
+            <Nav.Link as={Link} to="/new-request">New Request</Nav.Link>
             <Nav.Link href="#link">Requests</Nav.Link>
             <Nav.Link href="#link">Volunteers</Nav.Link>
           </Nav>
