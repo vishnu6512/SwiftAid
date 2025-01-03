@@ -12,7 +12,7 @@ function BasicExample() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href='/'>Home</Nav.Link>
-            <Nav.Link href='/new-request'>New Requests</Nav.Link>
+            <Nav.Link href='/newrequest'>New Request</Nav.Link>
             <Nav.Link href="#link">Requests</Nav.Link>
             <Nav.Link href="#link">Volunteers</Nav.Link>
           </Nav>
