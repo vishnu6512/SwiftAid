@@ -2,6 +2,33 @@ import React, { useState, useEffect } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 import { saveRequest } from '../services/allAPI'
 
+const styles = {
+  title: {
+    color: '#1a237e',
+    borderBottom: '3px solid #e53935',
+    display: 'inline-block',
+    paddingBottom: '5px',
+    marginBottom: '1.5rem'
+  },
+  formLabel: {
+    color: '#1a237e',
+    fontWeight: '500'
+  },
+  submitButton: {
+    backgroundColor: '#1a237e',
+    border: 'none',
+    padding: '0.8rem',
+    transition: 'all 0.3s ease',
+    ':hover': {
+      backgroundColor: '#0d1757'
+    }
+  },
+  mapContainer: {
+    borderRadius: '8px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    overflow: 'hidden'
+  }
+};
 
 const NewRequest = () => {
 
@@ -148,26 +175,27 @@ const NewRequest = () => {
 
   return (
     <Container className="p-4">
-      <h1 className="mb-4">New Request</h1>
-      <p className="text-muted mb-4">
+      <h1 style={styles.title}>New Request</h1>
+      <p className="text-muted mb-4" style={{ color: '#424242' }}>
         Need help? Share your request with the community so volunteers can assist you. 
         Provide as much detail as possible to ensure quick and effective support.
       </p>
       
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label>Request Title</Form.Label>
+          <Form.Label style={styles.formLabel}>Request Title</Form.Label>
           <Form.Control onChange={(e) => setRequestDetails({...requestDetails, title: e.target.value})}
             type="text"
             id="title"
             name="title"
             placeholder="Brief description of what you need"
             required
+            style={{ borderRadius: '6px' }}
           />
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Detailed Description</Form.Label>
+          <Form.Label style={styles.formLabel}>Detailed Description</Form.Label>
           <Form.Control onChange={(e) => setRequestDetails({...requestDetails, description: e.target.value})}
             as="textarea"
             id="description"
@@ -179,7 +207,7 @@ const NewRequest = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Location</Form.Label>
+          <Form.Label style={styles.formLabel}>Location</Form.Label>
           <Form.Control
             type="text"
             id="location"
@@ -189,15 +217,17 @@ const NewRequest = () => {
             onChange={(e) => setRequestDetails({...requestDetails, location: e.target.value})}
             required
           />
-          <div 
-            ref={mapRef}
-            style={{ width: '100%', height: '400px', marginTop: '10px' }}
-            className="mb-3"
-          />
+          <div style={styles.mapContainer}>
+            <div 
+              ref={mapRef}
+              style={{ width: '100%', height: '400px', marginTop: '10px' }}
+              className="mb-3"
+            />
+          </div>
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Contact Information</Form.Label>
+          <Form.Label style={styles.formLabel}>Contact Information</Form.Label>
           <Form.Control onChange={(e) => setRequestDetails({...requestDetails, contact: e.target.value})}
             type="text"
             id="contact"
@@ -207,7 +237,11 @@ const NewRequest = () => {
           />
         </Form.Group>
 
-        <Button onClick={handleSubmit} type="submit" variant="primary" className="w-100">
+        <Button 
+          onClick={handleSubmit} 
+          type="submit" 
+          style={styles.submitButton}
+          className="w-100">
           Submit Request
         </Button>
       </Form>

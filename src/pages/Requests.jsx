@@ -40,21 +40,54 @@ const Requests = () => {
         }
     }
 
+    const styles = {
+        title: {
+            color: '#1a237e',
+            borderBottom: '3px solid #e53935',
+            display: 'inline-block',
+            paddingBottom: '5px',
+            marginBottom: '2rem'
+        },
+        card: {
+            transition: 'transform 0.2s',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            border: 'none',
+            height: '100%',
+            ':hover': {
+                transform: 'translateY(-5px)'
+            }
+        },
+        cardTitle: {
+            color: '#1a237e',
+            fontWeight: '600'
+        },
+        cardText: {
+            color: '#424242'
+        },
+        dropdown: {
+            backgroundColor: '#e53935',
+            border: 'none',
+            ':hover': {
+                backgroundColor: '#c62828'
+            }
+        }
+    };
+
     return (
-        <Container>
-            <h1>Active Requests</h1>
-            <Row>
+        <Container className="py-4">
+            <h1 style={styles.title}>Active Requests</h1>
+            <Row className="g-4">
                 {requests.filter(request => request.status !== 'assigned').map((request) => (
                     <Col md={4} key={request.id}>
-                        <Card style={{ maxHeight: '300px', minHeight: '300px' }}>
+                        <Card style={styles.card}>
                             <Card.Body>
-                                <Card.Title>{request.title}</Card.Title>
-                                <Card.Text>{request.description}</Card.Text>
-                                <Card.Text>{request.location}</Card.Text>
-                                <Card.Text>{request.contact}</Card.Text> 
+                                <Card.Title style={styles.cardTitle}>{request.title}</Card.Title>
+                                <Card.Text style={styles.cardText}>{request.description}</Card.Text>
+                                <Card.Text style={styles.cardText}>{request.location}</Card.Text>
+                                <Card.Text style={styles.cardText}>{request.contact}</Card.Text> 
                                 
                                 <Dropdown>
-                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                    <Dropdown.Toggle style={styles.dropdown}>
                                         Assign Volunteer
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
@@ -73,17 +106,17 @@ const Requests = () => {
                     </Col>
                 ))}
             </Row>
-            <h1>Assigned Requests</h1>
-            <Row>
+            <h1 style={styles.title} className="mt-5">Assigned Requests</h1>
+            <Row className="g-4">
                 {requests.filter(request => request.status === 'assigned').map((request) => (
                     <Col md={4} key={request.id}>
-                        <Card style={{ maxHeight: '300px', minHeight: '300px' }}>
+                        <Card style={styles.card}>
                             <Card.Body>
-                                <Card.Title>{request.title}</Card.Title>
-                                <Card.Text>{request.description}</Card.Text>
-                                <Card.Text>{request.location}</Card.Text>
-                                <Card.Text>{request.contact}</Card.Text>
-                                <Card.Text>
+                                <Card.Title style={styles.cardTitle}>{request.title}</Card.Title>
+                                <Card.Text style={styles.cardText}>{request.description}</Card.Text>
+                                <Card.Text style={styles.cardText}>{request.location}</Card.Text>
+                                <Card.Text style={styles.cardText}>{request.contact}</Card.Text>
+                                <Card.Text style={styles.cardText}>
                                     Assigned to: {request.assignedVolunteer?.name}
                                 </Card.Text>
                             </Card.Body>

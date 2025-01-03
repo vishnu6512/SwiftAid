@@ -2,6 +2,42 @@ import React, { useState, useEffect } from 'react'
 import { Container, Form, Row, Col } from 'react-bootstrap'
 import { saveVolunteer } from '../services/allAPI'
 
+const styles = {
+  title: {
+    color: '#1a237e',
+    borderBottom: '3px solid #e53935',
+    display: 'inline-block',
+    paddingBottom: '5px',
+    marginBottom: '2rem'
+  },
+  subtitle: {
+    color: '#1a237e',
+    fontWeight: '600',
+    marginBottom: '1rem'
+  },
+  formLabel: {
+    color: '#1a237e',
+    fontWeight: '500'
+  },
+  submitButton: {
+    backgroundColor: '#1a237e',
+    border: 'none',
+    padding: '0.8rem',
+    transition: 'all 0.3s ease',
+    ':hover': {
+      backgroundColor: '#0d1757'
+    }
+  },
+  mapContainer: {
+    borderRadius: '8px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    overflow: 'hidden'
+  },
+  infoText: {
+    color: '#424242',
+    lineHeight: '1.6'
+  }
+};
 
 const Volunteers = () => {
 
@@ -142,34 +178,34 @@ const Volunteers = () => {
     return (
         <>
 
-            <Container>
-                <h1 className='text-center fs-1 mb-5 mt-3 fw-bold'>Volunteer Registration</h1>
+            <Container className="py-4">
+                <h1 style={styles.title} className="text-center">Volunteer Registration</h1>
                 <Row>
                     <Col md={6}>
                         <Form>
                             <Form.Group className="mb-3" controlId="formName">
-                                <Form.Label>Full Name</Form.Label>
-                                <Form.Control onChange={(e) => setVolunteerDetails({ ...volunteerDetails, name: e.target.value })} type="text" placeholder="Enter your full name" />
+                                <Form.Label style={styles.formLabel}>Full Name</Form.Label>
+                                <Form.Control onChange={(e) => setVolunteerDetails({ ...volunteerDetails, name: e.target.value })} type="text" placeholder="Enter your full name" style={{ borderRadius: '6px' }} />
                             </Form.Group>
 
                             <Form.Group className="mb-3 " controlId="formPhone">
-                                <Form.Label>Phone Number</Form.Label>
-                                <Form.Control onChange={(e) => setVolunteerDetails({ ...volunteerDetails, phone: e.target.value })} type="tel" placeholder="Enter your phone number" />
+                                <Form.Label style={styles.formLabel}>Phone Number</Form.Label>
+                                <Form.Control onChange={(e) => setVolunteerDetails({ ...volunteerDetails, phone: e.target.value })} type="tel" placeholder="Enter your phone number" style={{ borderRadius: '6px' }} />
                             </Form.Group>
 
                             <Form.Group className="mb-3 " controlId="formEmail">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control onChange={(e) => setVolunteerDetails({ ...volunteerDetails, email: e.target.value })} type="email" placeholder="Enter your email" />
+                                <Form.Label style={styles.formLabel}>Email address</Form.Label>
+                                <Form.Control onChange={(e) => setVolunteerDetails({ ...volunteerDetails, email: e.target.value })} type="email" placeholder="Enter your email" style={{ borderRadius: '6px' }} />
                             </Form.Group>
 
                             <Form.Group className="mb-3 " controlId="formAge">
-                                <Form.Label>Age</Form.Label>
-                                <Form.Control onChange={(e) => setVolunteerDetails({ ...volunteerDetails, age: e.target.value })} type="number" placeholder="Enter your age" />
+                                <Form.Label style={styles.formLabel}>Age</Form.Label>
+                                <Form.Control onChange={(e) => setVolunteerDetails({ ...volunteerDetails, age: e.target.value })} type="number" placeholder="Enter your age" style={{ borderRadius: '6px' }} />
                             </Form.Group>
 
                             <Form.Group className="mb-3 " controlId="formGender">
-                                <Form.Label>Gender</Form.Label>
-                                <Form.Select onChange={(e) => setVolunteerDetails({ ...volunteerDetails, gender: e.target.value })}>
+                                <Form.Label style={styles.formLabel}>Gender</Form.Label>
+                                <Form.Select onChange={(e) => setVolunteerDetails({ ...volunteerDetails, gender: e.target.value })} style={{ borderRadius: '6px' }}>
                                     <option value="">Select gender</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
@@ -178,13 +214,14 @@ const Volunteers = () => {
                             </Form.Group>
 
                             <Form.Group className="mb-3 " controlId="formLocation">
-                                <Form.Label>Location</Form.Label>
+                                <Form.Label style={styles.formLabel}>Location</Form.Label>
                                 <Form.Control
                                     id="location"
                                     type="text"
                                     placeholder="Search for a location or click on the map"
                                     value={volunteerDetails.location}
                                     onChange={(e) => setVolunteerDetails({ ...volunteerDetails, location: e.target.value })}
+                                    style={{ borderRadius: '6px' }}
                                 />
                                 <div
                                     ref={mapRef}
@@ -193,19 +230,19 @@ const Volunteers = () => {
                                 />
                             </Form.Group>
 
-                            <button onClick={handleSubmit} type="submit" className="btn btn-primary mb-5">Submit</button>
+                            <button onClick={handleSubmit} type="submit" style={styles.submitButton} className="btn w-100">Submit</button>
                         </Form>
                     </Col>
                     <Col md={6}>
-                        <h2>Why Should You Register as a Volunteer?</h2>
-                        <p>
+                        <h2 style={styles.subtitle}>Why Should You Register as a Volunteer?</h2>
+                        <p style={styles.infoText}>
                             Volunteering is a selfless act that helps communities in times of need. When disaster strikes or during critical situations, volunteers are the backbone that ensures effective relief and recovery. By registering as a volunteer, you become a vital part of a network that makes a difference.
                         </p>
-                        <p>
+                        <p style={styles.infoText}>
                             Whether it's helping people recover from natural disasters, providing support to underprivileged communities, or assisting in emergencies, your actions can have a profound impact. Volunteering not only aids others, but it also provides you with a sense of purpose and fulfillment.
                         </p>
 
-                        <h3>Benefits of Volunteering:</h3>
+                        <h3 style={styles.subtitle}>Benefits of Volunteering:</h3>
                         <ul>
                             <li><strong>Make a Direct Impact:</strong> Your involvement can directly affect the lives of people who are going through challenging times. The aid you provide can be life-changing for those in need.</li>
                             <li><strong>Gain New Skills:</strong> Volunteering provides you with an opportunity to develop new skills, whether it’s leadership, first aid, communication, or teamwork. These skills can enhance both your personal and professional growth.</li>
@@ -214,8 +251,8 @@ const Volunteers = () => {
                             <li><strong>Build Community Connections:</strong> Volunteering gives you a chance to connect with your local community and understand its unique needs, helping you contribute to its growth and development.</li>
                         </ul>
 
-                        <h3>What We Expect from Volunteers:</h3>
-                        <p>
+                        <h3 style={styles.subtitle}>What We Expect from Volunteers:</h3>
+                        <p style={styles.infoText}>
                             Volunteers are expected to be committed, compassionate, and ready to assist when needed. The situations you’ll encounter can be challenging, but your willingness to help can make a huge difference in the outcome. We value:
                         </p>
                         <ul>
