@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Form, Row, Col } from 'react-bootstrap'
-import { saveVolunteer } from '../services/allAPI'
+import { Container, Form, Row, Col, Table, Button } from 'react-bootstrap'
+import { saveVolunteer, getAllVolunteers, deleteVolunteer } from '../services/allAPI'
 
 const styles = {
   title: {
@@ -36,6 +36,15 @@ const styles = {
   infoText: {
     color: '#424242',
     lineHeight: '1.6'
+  },
+  table: {
+    backgroundColor: '#fff',
+    borderRadius: '8px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+  },
+  tableHeader: {
+    backgroundColor: '#1a237e',
+    color: '#fff'
   }
 };
 
@@ -55,8 +64,10 @@ const Volunteers = () => {
     const [map, setMap] = useState(null)
     const [marker, setMarker] = useState(null)
     const mapRef = React.useRef(null)
+    const [volunteers, setVolunteers] = useState([])
 
     useEffect(() => {
+        fetchVolunteers()
         if (window.google && window.google.maps && window.google.maps.places) {
             initializeMapAndAutocomplete()
             return
@@ -87,6 +98,15 @@ const Volunteers = () => {
             }
         }
     }, [])
+
+    const fetchVolunteers = async () => {
+        try {
+            const response = await getAllVolunteers()
+            setVolunteers(response.data)
+        } catch (error) {
+            console.error('Error fetching volunteers:', error)
+        }
+    }
 
     const updateLocationDetails = (address, lat, lng) => {
         setVolunteerDetails(prev => ({
@@ -176,7 +196,7 @@ const Volunteers = () => {
             const response = await saveVolunteer(volunteerDetails)
             if (response) {
                 alert('Registration successful! Thank you for volunteering.')
-                // Reset all form fields
+                fetchVolunteers()
                 setVolunteerDetails({
                     name: '',
                     phone: '',
@@ -187,11 +207,9 @@ const Volunteers = () => {
                     lat: null,
                     lng: null
                 })
-                // Reset the marker position if it exists
                 if (marker) {
                     marker.setMap(null)
                 }
-                // Reset map zoom and center if needed
                 if (map) {
                     map.setCenter({ lat: 0, lng: 0 })
                     map.setZoom(2)
@@ -202,6 +220,20 @@ const Volunteers = () => {
             console.error('Error:', error)
         }
     }
+
+    const handleDelete = async (volunteerId) => {
+        if (window.confirm('Are you sure you want to remove this volunteer?')) {
+            try {
+                await deleteVolunteer(volunteerId)
+                // Refresh the volunteers list
+                fetchVolunteers()
+            } catch (error) {
+                console.error('Error deleting volunteer:', error)
+                alert('Error deleting volunteer. Please try again.')
+            }
+        }
+    }
+
     return (
         <>
 
@@ -296,6 +328,42 @@ const Volunteers = () => {
 
                 </Row>
 
+                <h2 style={styles.title} className="text-center mt-5">Active Volunteers</h2>
+                <Table striped bordered hover style={styles.table}>
+                    <thead style={styles.tableHeader}>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Location</th>
+                            <th>Contact</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {volunteers.map((volunteer, index) => (
+                            <tr key={index}>
+                                <td>{volunteer.name}</td>
+                                <td>{volunteer.age}</td>
+                                <td>{volunteer.gender}</td>
+                                <td>{volunteer.location}</td>
+                                <td>
+                                    <div>📞 {volunteer.phone}</div>
+                                    <div>✉️ {volunteer.email}</div>
+                                </td>
+                                <td>
+                                    <Button 
+                                        variant="danger" 
+                                        size="sm"
+                                        onClick={() => handleDelete(volunteer.id)}
+                                    >
+                                        🗑️ Delete
+                                    </Button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
             </Container>
         </>
 

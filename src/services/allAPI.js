@@ -29,3 +29,8 @@ export const updateRequest = async (request) => {
 export const deleteRequest = async (requestId) => {
     return await commonAPI("DELETE", `${serverURL}/requests/${requestId}`)
 }
+
+// to delete a volunteer from the server
+export const deleteVolunteer = async (volunteerId) => {
+    return await commonAPI("DELETE", `${serverURL}/volunteers/${volunteerId}`)
+}
