@@ -172,8 +172,35 @@ const Volunteers = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await saveVolunteer(volunteerDetails)
-        console.log(response)
+        try {
+            const response = await saveVolunteer(volunteerDetails)
+            if (response) {
+                alert('Registration successful! Thank you for volunteering.')
+                // Reset all form fields
+                setVolunteerDetails({
+                    name: '',
+                    phone: '',
+                    email: '',
+                    age: '',
+                    gender: '',
+                    location: '',
+                    lat: null,
+                    lng: null
+                })
+                // Reset the marker position if it exists
+                if (marker) {
+                    marker.setMap(null)
+                }
+                // Reset map zoom and center if needed
+                if (map) {
+                    map.setCenter({ lat: 0, lng: 0 })
+                    map.setZoom(2)
+                }
+            }
+        } catch (error) {
+            alert('Error submitting registration. Please try again.')
+            console.error('Error:', error)
+        }
     }
     return (
         <>
