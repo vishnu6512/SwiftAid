@@ -72,7 +72,7 @@ const Volunteers = () => {
             initializeMapAndAutocomplete()
         }
 
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAcXXwIGx17FJFYRyPuKaGn3seJ_Rwn-5o&libraries=places&callback=initializeGoogleMaps`
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}&libraries=places&callback=initializeGoogleMaps`
         script.async = true
         script.defer = true
         document.head.appendChild(script)
